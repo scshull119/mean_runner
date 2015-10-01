@@ -1,0 +1,76 @@
+body {
+  background-image: url('/images/marathon.jpg');
+}
+
+#welcome-slide {
+  display: block;
+}
+
+#distance-slide {
+  display: none;
+}
+
+.interface-box {
+  margin-top: 10rem;
+  position: relative;
+  background-color: white;
+  padding-top: 85px;
+  padding-bottom: 85px;
+  min-height: 200px;
+  height: 50vh;
+}
+
+.band {
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 8.5rem;
+  background-color: purple;
+}
+
+.upper {
+  top: 0;
+}
+
+.lower {
+  bottom: 0;
+}
+
+.header {
+  color: white;
+}
+
+.header h1 {
+  margin: 0;
+  padding: 0;
+}
+
+.header p {
+  margin: 0;
+  padding: 0;
+}
+
+.bib-text {
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 12.0rem;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .bib-text {
+    font-size: 9.0rem;
+  }
+}
+
+#welcome-options {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+#welcome-options li {
+  display: inline;
+  list-style-type: none;
+  margin-left: 20px;
+  margin-right: 20px;
+}
