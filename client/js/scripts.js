@@ -27,47 +27,85 @@ $(document).ready(function() {
   // Listeners for welcome slide links..
   $('#launch-link').on('click', function(e) {
     e.preventDefault();
-    $welcome.hide();
-    displayDistance();
+    slideOut($welcome, 'left');
+    displayDistance('right');
   });
 
   // *****  Functions for Displaying various "slides" within user interface *****
 
   // Function for displaying Welcome slide...
 
-  function displayWelcome() {
-    $welcome.show();
+  function displayWelcome(origin) {
+    slideIn($welcome, origin);
     $left.hide();
     $right.hide();
   }
 
   // Function for displaying Distance Query slide...
 
-  function displayDistance() {
-    $distance.show();
+  function displayDistance(origin) {
+    slideIn($distance, origin);
     $left.show();
     $right.show();
     $left.on('click', function() {
-      $distance.hide();
+      slideOut($distance, 'right');
       $left.off();
       $right.off();
-      displayWelcome();
+      displayWelcome('left');
     });
     $right.on('click', function() {
-      $distance.hide();
+      slideOut($distance, 'left');
       $left.off();
       $right.off();
-      displayDays();
+      displayDays('right');
     });
   }
 
-  function displayDays() {
-    $days.show();
+  function displayDays(origin) {
+    slideIn($days, origin);
     $left.show();
     $right.show();
     $left.on('click', function() {
-      $days.hide();
-      displayDistance();
+      slideOut($days, 'right');
+      $left.off();
+      $right.off();
+      displayDistance('left');
+    });
+  }
+
+  function slideIn($slide, direction) {
+    console.log("Sliding in from " + direction + "!");
+
+    var positionValue;
+
+    if(direction === "left") {
+      positionValue = '-100%';
+    } else if(direction === "right") {
+      positionValue = '100%';
+    }
+
+    $slide.css('left', positionValue);
+    var slideObject = {};
+    slideObject['left'] = '0';
+    $slide.animate(slideObject);
+  }
+
+
+  function slideOut($slide, direction) {
+
+    var positionValue;
+
+    if(direction === "left") {
+      positionValue = '-100%';
+    } else if(direction === "right") {
+      positionValue = '100%';
+    }
+
+    console.log("Sliding out to " + direction + "!");
+    var slideObject = {};
+    slideObject['left'] = positionValue;
+    $slide.animate(slideObject, function() {
+      console.log("Slide out COMPLETED");
     });
   }
 

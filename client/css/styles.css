@@ -2,12 +2,14 @@ body {
   background-image: url('/images/marathon.jpg');
 }
 
-#welcome-slide {
-  display: block;
+.slide {
+  position: absolute;
+  width: 100%;
+  right: -100%;
 }
 
-#distance-slide, #days-slide {
-  display: none;
+#welcome-slide {
+  right: 0;
 }
 
 .interface-box {
@@ -18,6 +20,7 @@ body {
   padding-bottom: 85px;
   min-height: 200px;
   height: 50vh;
+  overflow: hidden;
 }
 
 .band {
