@@ -51,15 +51,49 @@
         </div>
 
         <div id="pace-slide" class="slide">
-          <h4>Pace Slide</h4>
+          <div class="slide-container">
+            <h4>What is your best average pace (minutes per mile)?</h4>
+            <p>10:00 per mile is a good pace for most beginners.</p>
+            <div class="pace-input">
+              <ul>
+                <li>Mins: <input type="number"></li>
+                <li>Secs: <input type="number"></li>
+              </ul>
+            </div>
+          </div>
         </div>
 
         <div id="signup-slide" class="slide">
-          <h4>Sign Up Slide</h4>
+          <div class="slide-container">
+            <h4>Almost There!</h4>
+            <h5>Create an account to save your info, or skip to race recommendations.</h5>
+            <div class="row">
+              <form action="/users" method="post">
+                <div class="four columns">
+                  <label for="choose-username">Username:</label>
+                  <input id="choose-username" type="text" name="user[username]" placeholder="Username...">
+                  <label for="first-name">First Name:</label>
+                  <input id="first-name" type="text" name="user[first_name]" placeholder="First name...">
+                </div>
+                <div class="four columns">
+                  <label for="choose-password">Password:</label>
+                  <input id="choose-password" type="password" name="user[password]">
+                  <label for="confirm-password">Confirm Password:</label>
+                  <input id="confirm-password" type="password" name="user[password_confirm]">
+                </div>
+                <div class="four columns">
+                  <input type="submit">
+              </form>
+                <button id="skip">Continue Without Saving</button>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div id="login-slide" class="slide">
-          <h4>Login Slide</h4>
+          <div class="slide-container">
+            <h4>Login Slide</h4>
+          </div>
         </div>
 
       </div>

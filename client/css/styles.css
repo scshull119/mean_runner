@@ -103,11 +103,18 @@ body {
   padding: 0;
 }
 
-#welcome-options li {
+li {
   display: inline;
   list-style-type: none;
+}
+
+#welcome-options li {
   margin-left: 20px;
   margin-right: 20px;
+}
+
+input[type="number"] {
+  width: 150px;
 }
 
 /* For people who like really narrow browser windows */
@@ -118,6 +125,9 @@ body {
   }
   #welcome-options {
     font-size: 1.5rem;
+  }
+  .pace-input li {
+    display: block;
   }
 }
 

@@ -14,7 +14,7 @@ $(document).ready(function() {
   var $days = $('#days-slide');
   var $pace = $('#pace-slide');
   var $signup = $('#signup-slide');
-  var $login = $('#login');
+  var $login = $('#login-slide');
 
   // Listeners for welcome slide links..
   $('#launch-link').on('click', function(e) {
