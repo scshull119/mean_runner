@@ -5,22 +5,37 @@ body {
 .slide {
   position: absolute;
   width: 100%;
-  right: -100%;
+  left: 100%;
+  overflow-y: scroll;
+}
+
+.slide-container {
+  padding: 25px;
 }
 
 #welcome-slide {
-  right: 0;
+  left: 0;
 }
 
 .interface-box {
-  margin-top: 10rem;
   position: relative;
-  background-color: white;
-  padding-top: 85px;
-  padding-bottom: 85px;
+  background-color: purple;
   min-height: 200px;
-  height: 50vh;
+  height: 80vh;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
   overflow: hidden;
+}
+
+.content-box {
+  background-color: white;
+  position: absolute;
+  top: 85px;
+  right: 0;
+  bottom: 85px;
+  left: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .band {
@@ -41,7 +56,7 @@ body {
 
 .arrow {
   position: absolute;
-  top: 20px;
+  bottom: 20px;
   cursor: pointer;
 }
 
@@ -81,14 +96,9 @@ body {
   text-align: center;
 }
 
-@media (max-width: 600px) {
-  .bib-text {
-    font-size: 9.0rem;
-  }
-}
-
 #welcome-options {
   text-align: center;
+  font-size: 2.0rem;
   margin: 0;
   padding: 0;
 }
@@ -98,4 +108,50 @@ body {
   list-style-type: none;
   margin-left: 20px;
   margin-right: 20px;
+}
+
+/* For people who like really narrow browser windows */
+
+@media (max-width: 600px) {
+  .bib-text {
+    font-size: 9.0rem;
+  }
+  #welcome-options {
+    font-size: 1.5rem;
+  }
+}
+
+/* For the bigger iPhones */
+
+@media (max-width: 450px) {
+  .bib-text {
+    font-size: 6.0rem;
+  }
+  #welcome-options li {
+    display: block;
+    font-size: 1.5rem;
+  }
+}
+
+/* For the little iPhones */
+
+@media (max-width: 350px) {
+  .interface-box {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    height: 90vh;
+  }
+  .interface-box p {
+    display: none;
+  }
+  .content-box {
+    top: 50px;
+    bottom: 50px;
+  }
+  .arrow {
+    bottom: 5px;
+  }
+  .arrow img {
+    width: 35px;
+  }
 }

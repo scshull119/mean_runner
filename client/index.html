@@ -14,46 +14,69 @@
 
   <div class="container">
     <div class="interface-box">
-      <div class="upper band">
-        <div class="header">
-          <h1>NewRunner</h1>
-          <p>Set your running goals in a few easy steps</p>
+
+      <div class="header">
+        <h1>NewRunner</h1>
+        <p>Set your running goals in a few easy steps</p>
+      </div>
+
+      <div class="content-box">
+
+        <div id="welcome-slide" class="slide">
+          <div class="slide-container">
+            <h2 class="bib-text">WELCOME</h2>
+            <ul id="welcome-options">
+              <li><a href="" id="launch-link">New? Get Started</a></li>
+              <li><a href="" id="login-link">Returning? Log In!</a></li>
+            </ul>
+          </div>
         </div>
-      </div>
 
-      <div id="welcome-slide" class="slide">
-        <h2 class="bib-text">WELCOME</h2>
-        <ul id="welcome-options">
-          <li><a href="" id="launch-link">New? Get Started</a></li>
-          <li><a href="" id="login-link">Returning? Log In!</a></li>
-        </ul>
-      </div>
-
-      <div id="distance-slide" class="slide">
-        <h3>What is your comfortable running distance, in miles?</h3>
-        <h5>If you've never run before, maybe just a mile to start?</h5>
-      </div>
-
-      <div id="days-slide" class="slide">
-        <h3>How many days per week would you like to run?</h3>
-        <h5>Three (3) is a good choice if you're new.</h5>
-      </div>
-
-
-
-
-      <div class="lower band">
-        <div class="left arrow" id="left">
-          <img src="/images/arrowleft.png">
+        <div id="distance-slide" class="slide">
+          <div class="slide-container">
+            <h4>What is your comfortable running distance, in miles?</h4>
+            <p>If you're not sure, just choose one mile for now.</p>
+            <input id="distance-input" type="number" min="1">
+            <button id="distance-button">Continue</button>
+          </div>
         </div>
-        <div class="right arrow" id="right">
-          <img src="/images/arrowright.png">
+
+        <div id="days-slide" class="slide">
+          <div class="slide-container">
+            <h4>How many days per week would you like to run?</h4>
+            <p> Beginning runner? Three days a week is a good starting point.</p>
+            <input id="days-input" type="number" min="1">
+            <button id="days-button">Continue</button>
+          </div>
         </div>
+
+        <div id="pace-slide" class="slide">
+          <h4>Pace Slide</h4>
+        </div>
+
+        <div id="signup-slide" class="slide">
+          <h4>Sign Up Slide</h4>
+        </div>
+
+        <div id="login-slide" class="slide">
+          <h4>Login Slide</h4>
+        </div>
+
       </div>
+
+
+
+      <div class="left arrow" id="left">
+        <img src="/images/arrowleft.png">
+      </div>
+      <div class="right arrow" id="right">
+        <img src="/images/arrowright.png">
+      </div>
+
     </div>
   </div>
 
   <script type="text/javascript" src="/js/jquery.js"></script>
-  <script type="text/javascript" src="/js/scripts.js"></script>
+  <script type="text/javascript" src="/js/slide.js"></script>
 </body>
 </html>
