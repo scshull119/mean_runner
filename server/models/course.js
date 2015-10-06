@@ -1,18 +1,15 @@
 var mongoose = require('mongoose');
 
-var RaceSchema = new mongoose.Schema({
+var CourseSchema = new mongoose.Schema({
   name: {type: String},
-  date: {type: Date},
   mileage: {type: Number},
-  raceType: {type: String},
   borough: {type: String},
   venue: {type: String},
-  producer: {type: String},
   description: {type: String},
   linkUrl: {type: String},
   kmlUrl: {type: String}
 });
 
-var Race = mongoose.model('race', RaceSchema);
+var Course = mongoose.model('course', CourseSchema);
 
-module.exports = Race;
+module.exports = Course;

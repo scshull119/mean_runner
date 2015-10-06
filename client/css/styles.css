@@ -117,6 +117,11 @@ input[type="number"] {
   width: 150px;
 }
 
+.map {
+  height: 250px;
+  width: 250px;
+}
+
 /* For people who like really narrow browser windows */
 
 @media (max-width: 600px) {

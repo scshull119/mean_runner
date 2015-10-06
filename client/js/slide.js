@@ -15,6 +15,8 @@ $(document).ready(function() {
   var $pace = $('#pace-slide');
   var $signup = $('#signup-slide');
   var $login = $('#login-slide');
+  var $course = $('#course-slide');
+  var $race = $('#race-slide');
 
   // Listeners for welcome slide links..
   $('#launch-link').on('click', function(e) {
@@ -42,7 +44,7 @@ $(document).ready(function() {
 // Function and arrays for maniging slide order and forward/back controls.
 
   var newOrder = [$welcome, $distance, $days, $pace, $signup];
-  var loginOrder = [$welcome, $login];
+  var loginOrder = [$welcome, $login, $course, $race];
 
   function displaySlide(orderArray, index, origin) {
     $slide = orderArray[index];
@@ -123,4 +125,40 @@ $(document).ready(function() {
     });
   }
 
+
+
+
 });   // Closing document ready
+
+
+
+  function initMap() {
+    var courseMap = new google.maps.Map(document.getElementById('course-map'), {
+      center: {lat: 40.771440, lng: -73.974180},
+      scrollwheel: false,
+      zoom: 14
+    });
+
+    var raceMap = new google.maps.Map(document.getElementById('race-map'), {
+      center: {lat: 40.771440, lng: -73.974180},
+      scrollwheel: false,
+      zoom: 14
+    });
+
+
+    var courseKmlUrl = 'https://dl.dropboxusercontent.com/u/50332766/kml/prospect.kml';
+    var courseKmlOptions = {
+      suppressInfoWindows: true,
+      preserveViewport: false,
+      map: courseMap
+    };
+    var courseKmlLayer = new google.maps.KmlLayer(courseKmlUrl, courseKmlOptions);
+
+    var raceKmlUrl = 'https://dl.dropboxusercontent.com/u/50332766/kml/brooklynhalf.kml';
+    var raceKmlOptions = {
+      suppressInfoWindows: true,
+      preserveViewport: false,
+      map: raceMap
+    };
+    var raceKmlLayer = new google.maps.KmlLayer(raceKmlUrl, raceKmlOptions);
+  }
