@@ -1,10 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="RaceMaker">
   <head>
     <meta charset="utf-8">
     <title>NewRunner API admin page</title>
   </head>
   <body>
+    <section ng-controller='RacesController'>
+      <h4>Race Form</h4>
+      <form ng-submit="createRace()">
+        <input type="text" ng-model="newRace.name" placeholder="name">
+        <input type="date" ng-model="newRace.date" placeholder="date">
+        <input type="text" ng-model="newRace.mileage" placeholder="mileage">
+        <input type="text" ng-model="newRace.raceType" placeholder="racetype">
+        <input type="text" ng-model="newRace.borough" placeholder="borough">
+        <input type="text" ng-model="newRace.venue" placeholder="venue">
+        <input type="text" ng-model="newRace.producer" placeholder="producing orginization">
+        <input type="text" ng-model="newRace.linkURL" placeholder="link URL">
+        <input type="text" ng-model="newRace.kmlName" placeholder="kml Name">
+        <textarea rows="10" cols="50" placeholder="description" ng-model="newRace.description"></textarea>
+        <input type="submit">
+      </form>
 
+      <div ng-repeat="race in races">
+        <h4>{{ race.name }}</h4>
+      </div>
+
+      <h4>Course Form</h4>
+      <form ng-submit="createCourse()">
+        <input type="text" ng-model="newCourse.name" placeholder="name">
+        <input type="text" ng-model="newCourse.mileage" placeholder="mileage">
+        <input type="text" ng-model="newCourse.borough" placeholder="borough">
+        <input type="text" ng-model="newCourse.venue" placeholder="venue">
+        <input type="text" ng-model="newCourse.kmlName" placeholder="kml Name">
+        <textarea rows="10" cols="50" placeholder="description" ng-model="newCourse.description"></textarea>
+        <input type="submit">
+      </form>
+
+      <div ng-repeat="course in courses">
+        <h4>{{ course.name }}</h4>
+      </div>
+
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.js"></script>
+    <script src="/js/app.js"></script>
   </body>
 </html>

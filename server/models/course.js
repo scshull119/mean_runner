@@ -6,8 +6,7 @@ var CourseSchema = new mongoose.Schema({
   borough: {type: String},
   venue: {type: String},
   description: {type: String},
-  linkUrl: {type: String},
-  kmlUrl: {type: String}
+  kmlName: {type: String}
 });
 
 var Course = mongoose.model('course', CourseSchema);

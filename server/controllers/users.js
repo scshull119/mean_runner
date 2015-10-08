@@ -8,7 +8,7 @@ usersRouter.get('/', function(req, res) {
   });
 });
 
-usersRouter.post('/' function(req, res) {
+usersRouter.post('/', function(req, res) {
   var user = new User(req.body);
   user.save(function() {
     res.json(user);

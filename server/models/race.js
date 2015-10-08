@@ -10,7 +10,7 @@ var RaceSchema = new mongoose.Schema({
   producer: {type: String},
   description: {type: String},
   linkUrl: {type: String},
-  kmlUrl: {type: String}
+  kmlName: {type: String}
 });
 
 var Race = mongoose.model('race', RaceSchema);
