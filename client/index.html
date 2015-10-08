@@ -1,5 +1,5 @@
 <!DOCTYPE hmtl>
-<html>
+<html ng-app="RaceMaker">
 <head>
   <meta charset="utf-8">
   <title>NewRunner</title>
@@ -12,125 +12,133 @@
 </head>
 <body>
 
-  <div class="container">
-    <div class="interface-box">
+  <section ng-controller='RacesController'>
 
-      <div class="header">
-        <h1>NewRunner</h1>
-        <p>Set your running goals in a few easy steps</p>
-      </div>
+    <div class="container">
+      <div class="interface-box">
 
-      <div class="content-box">
-
-        <div id="welcome-slide" class="slide">
-          <div class="slide-container">
-            <h2 class="bib-text">WELCOME</h2>
-            <ul id="welcome-options">
-              <li><a href="" id="launch-link">New? Get Started</a></li>
-              <li><a href="" id="login-link">Returning? Log In!</a></li>
-            </ul>
-          </div>
+        <div class="header">
+          <h1>NewRunner</h1>
+          <p>Set your running goals in a few easy steps</p>
         </div>
 
-        <div id="distance-slide" class="slide">
-          <div class="slide-container">
-            <h4>What is your comfortable running distance, in miles?</h4>
-            <p>If you're not sure, just choose one mile for now.</p>
-            <input id="distance-input" type="number" min="1">
-            <button id="distance-button">Continue</button>
-          </div>
-        </div>
+        <div class="content-box">
 
-        <div id="days-slide" class="slide">
-          <div class="slide-container">
-            <h4>How many days per week would you like to run?</h4>
-            <p> Beginning runner? Three days a week is a good starting point.</p>
-            <input id="days-input" type="number" min="1">
-            <button id="days-button">Continue</button>
-          </div>
-        </div>
-
-        <div id="pace-slide" class="slide">
-          <div class="slide-container">
-            <h4>What is your best average pace (minutes per mile)?</h4>
-            <p>10:00 per mile is a good pace for most beginners.</p>
-            <div class="pace-input">
-              <ul>
-                <li>Mins: <input type="number"></li>
-                <li>Secs: <input type="number"></li>
+          <div id="welcome-slide" class="slide">
+            <div class="slide-container">
+              <h2 class="bib-text">WELCOME</h2>
+              <ul id="welcome-options">
+                <li><a href="" id="launch-link">New? Get Started</a></li>
+                <li><a href="" id="login-link">Returning? Log In!</a></li>
               </ul>
             </div>
           </div>
-        </div>
 
-        <div id="signup-slide" class="slide">
-          <div class="slide-container">
-            <h4>Almost There!</h4>
-            <h5>Create an account to save your info, or skip to race recommendations.</h5>
-            <div class="row">
-              <form action="/users" method="post">
-                <div class="four columns">
-                  <label for="choose-username">Username:</label>
-                  <input id="choose-username" type="text" name="user[username]" placeholder="Username...">
-                  <label for="first-name">First Name:</label>
-                  <input id="first-name" type="text" name="user[first_name]" placeholder="First name...">
-                </div>
-                <div class="four columns">
-                  <label for="choose-password">Password:</label>
-                  <input id="choose-password" type="password" name="user[password]">
-                  <label for="confirm-password">Confirm Password:</label>
-                  <input id="confirm-password" type="password" name="user[password_confirm]">
-                </div>
-                <div class="four columns">
-                  <input type="submit">
-              </form>
-                <button id="skip">Continue Without Saving</button>
+          <div id="distance-slide" class="slide">
+            <div class="slide-container">
+              <h4>What is your comfortable running distance, in miles?</h4>
+              <p>If you're not sure, just choose one mile for now.</p>
+              <input id="distance-input" type="number" min="1">
+              <button ng-click="storeDistance()" id="distance-button">Continue</button>
+            </div>
+          </div>
+
+          <div id="days-slide" class="slide">
+            <div class="slide-container">
+              <h4>How many days per week would you like to run?</h4>
+              <p> Beginning runner? Three days a week is a good starting point.</p>
+              <input id="days-input" type="number" min="1">
+              <button ng-click="storeDays()" id="days-button">Continue</button>
+            </div>
+          </div>
+
+          <div id="pace-slide" class="slide">
+            <div class="slide-container">
+              <h4>What is your best average pace (minutes per mile)?</h4>
+              <p>10:00 per mile is a good pace for most beginners.</p>
+              <div class="pace-input">
+                <ul>
+                  <li>Mins: <input id="pace-mins" type="number"></li>
+                  <li>Secs: <input id="pace-secs" type="number"></li>
+                  <button ng-click="storePace()" id="pace-button">Continue</button>
+                </ul>
               </div>
             </div>
           </div>
-        </div>
 
-        <div id="login-slide" class="slide">
-          <div class="slide-container">
-            <h4>Login Slide</h4>
-          </div>
-        </div>
-
-        <div id="course-slide" class="slide">
-          <div class="slide-container">
-            <h4>Course Slide</h4>
-            <div id="course-map" class="map">
-
+          <div id="signup-slide" class="slide">
+            <div class="slide-container">
+              <h4>Almost There!</h4>
+              <h5>Create an account to save your info, or skip to race recommendations.</h5>
+              <div class="row">
+                <form action="/users" method="post">
+                  <div class="four columns">
+                    <label for="choose-username">Username:</label>
+                    <input id="choose-username" type="text" name="user[username]" placeholder="Username...">
+                    <label for="first-name">First Name:</label>
+                    <input id="first-name" type="text" name="user[first_name]" placeholder="First name...">
+                  </div>
+                  <div class="four columns">
+                    <label for="choose-password">Password:</label>
+                    <input id="choose-password" type="password" name="user[password]">
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input id="confirm-password" type="password" name="user[password_confirm]">
+                  </div>
+                  <div class="four columns">
+                    <input type="submit">
+                    <button type="button" ng-click="noSave()" id="skip">Continue Without Saving</button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div id="race-slide" class="slide">
-          <div class="slide-container">
-            <h4>Race Slide</h4>
-            <div id="race-map" class="map">
-
+          <div id="login-slide" class="slide">
+            <div class="slide-container">
+              <h4>Login Slide</h4>
             </div>
           </div>
+
+          <div id="course-slide" class="slide">
+            <div class="slide-container">
+              <h4>Course Slide</h4>
+              <div id="course-map" class="map">
+
+              </div>
+            </div>
+          </div>
+
+          <div id="race-slide" class="slide">
+            <div class="slide-container">
+              <h4>Race Slide</h4>
+              <div id="race-map" class="map">
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+
+        <div class="left arrow" id="left">
+          <img src="/images/arrowleft.png">
+        </div>
+        <div class="right arrow" id="right">
+          <img src="/images/arrowright.png">
         </div>
 
       </div>
-
-
-
-      <div class="left arrow" id="left">
-        <img src="/images/arrowleft.png">
-      </div>
-      <div class="right arrow" id="right">
-        <img src="/images/arrowright.png">
-      </div>
-
     </div>
-  </div>
+
+  </section>
 
   <script type="text/javascript" src="/js/jquery.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqlNaZWZBk_nlAl6fa8PS8xw64QWqsn4c&callback=initMap"></script>
   <script type="text/javascript" src="/js/slide.js"></script>
   <script type="text/javascript" src="/js/map.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.js"></script>
+  <script src="/js/app.js"></script>
+
 </body>
 </html>
