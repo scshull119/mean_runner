@@ -22,6 +22,7 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
   var goalMilesPerWeek;
   var goalRaceDistance;
 
+  var myCourse;
   var myRace;
 
   $scope.getRaces = function() {
@@ -75,6 +76,9 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
       weeklyIncrease = .5;
     }
     console.log("Stored Distance: " + $scope.distance);
+    myCourse = searchCourses();
+    console.log(myCourse.name);
+
     slideOut($distance, 'left');
     displaySlide(newOrder, 2, 'right');
     $right.hide();
@@ -119,17 +123,45 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
     displaySlide(outputOrder, 1, 'right');
   };
 
+  function searchCourses() {
+    var potentialCourses = [];
+    for(var i = 0; i < $scope.courses.length; i++) {
+      if($scope.distance > ($scope.courses[i].mileage * .75) && $scope.distance < ($scope.courses[i].mileage * 1.25)) {
+        potentialCourses.push($scope.courses[i]);
+      }
+    }
+    if(potentialCourses.length) {
+      var courseIndex = Math.floor(Math.random() * potentialCourses.length);
+      return potentialCourses[courseIndex];
+    } else {
+      return false;
+    }
+  }
+
   function searchRaces() {
+    var potentialRaces = [];
+    var closestRace;
+    var closestRaceDifference = 3000;
     for(var i = 0; i < $scope.races.length; i++) {
       var raceDate = Date.parse($scope.races[i].date)
       var raceDistance =  $scope.races[i].mileage;
       var leadTimeWeeks = (raceDate - currentDate) / 604800000;
-
-      if(($scope.distance + (leadTimeWeeks * weeklyIncrease)) > (raceDistance * .9)) {
-        return $scope.races[i];
+      if(($scope.distance + (leadTimeWeeks * weeklyIncrease)) > (raceDistance * .9) && leadTimeWeeks >= 4) {
+        potentialRaces.push($scope.races[i]);
       }
     }
-    return false;
+    if(potentialRaces.length > 0) {
+      for(var j = 0; j < potentialRaces.length; j++) {
+        var raceDifference = Math.abs(potentialRaces[j].mileage - goalRaceDistance);
+        if(raceDifference < closestRaceDifference) {
+          closestRaceDifference = raceDifference;
+          closestRace = potentialRaces[j];
+        }
+      }
+      return closestRace;
+    } else {
+      return false;
+    }
   }
 
 }]);
