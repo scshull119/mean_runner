@@ -2,7 +2,7 @@ angular.module('RaceMaker', []);
 
 angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', function($scope, $http) {
 
-  console.log("Date.now()");
+  var currentDate = Date.now();
 
   console.log("RaceMaker controller is working");
 
@@ -16,7 +16,13 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
   $scope.days = 3;
   $scope.paceMins = 10;
   $scope.paceSecs  = 0;
-  $scope.goalDistance = 3.11;
+
+  var weeklyIncrease = .35;
+  var weeklyMiles;
+  var goalMilesPerWeek;
+  var goalRaceDistance;
+
+  var myRace;
 
   $scope.getRaces = function() {
     $http.get('/api/races').then(function(response) {
@@ -24,7 +30,6 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
     });
   };
   $scope.getRaces();
-
 
   $scope.createRace = function() {
     $http.post('/api/races', $scope.newRace).then(function(response) {
@@ -64,7 +69,11 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
     $left.off();
     $right.off();
 
-    $scope.distance = $('#distance-input').val();
+    $scope.distance = parseFloat($('#distance-input').val());
+
+    if($scope.distance >= 4) {
+      weeklyIncrease = .5;
+    }
     console.log("Stored Distance: " + $scope.distance);
     slideOut($distance, 'left');
     displaySlide(newOrder, 2, 'right');
@@ -75,9 +84,18 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
     $left.off();
     $right.off();
 
-    $scope.days = $('#days-input').val();
-
+    $scope.days = parseInt($('#days-input').val());
+    weeklyMiles = $scope.distance * $scope.days;
+    totalWeeklyIncrease = weeklyIncrease * $scope.days;
+    goalMilesPerWeek = weeklyMiles + (totalWeeklyIncrease * 6);
+    goalRaceDistance = $scope.distance + (weeklyIncrease * 6);
+    console.log("Weekly Increase: " + weeklyIncrease + ", Starter Distance: " + $scope.distance);
     console.log("Stored Days/week: " + $scope.days);
+    console.log("Goal Race Distance: " + goalRaceDistance + " miles");
+
+    myRace = searchRaces();
+    console.log(myRace.name);
+
     slideOut($days, 'left');
     displaySlide(newOrder, 3, 'right');
     $right.hide();
@@ -100,5 +118,18 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
     slideOut($signup, 'left');
     displaySlide(outputOrder, 1, 'right');
   };
+
+  function searchRaces() {
+    for(var i = 0; i < $scope.races.length; i++) {
+      var raceDate = Date.parse($scope.races[i].date)
+      var raceDistance =  $scope.races[i].mileage;
+      var leadTimeWeeks = (raceDate - currentDate) / 604800000;
+
+      if(($scope.distance + (leadTimeWeeks * weeklyIncrease)) > (raceDistance * .9)) {
+        return $scope.races[i];
+      }
+    }
+    return false;
+  }
 
 }]);
