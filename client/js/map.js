@@ -12,7 +12,7 @@ function initMap() {
   });
 
 
-  var courseKmlUrl = 'https://dl.dropboxusercontent.com/u/50332766/kml/prospect.kml';
+  var courseKmlUrl = 'https://dl.dropboxusercontent.com/u/50332766/kml/courses/' + courseKmlName + '.kml';
   var courseKmlOptions = {
     suppressInfoWindows: true,
     preserveViewport: false,
@@ -20,11 +20,15 @@ function initMap() {
   };
   var courseKmlLayer = new google.maps.KmlLayer(courseKmlUrl, courseKmlOptions);
 
-  var raceKmlUrl = 'https://dl.dropboxusercontent.com/u/50332766/kml/brooklynhalf.kml';
+  var raceKmlUrl = 'https://dl.dropboxusercontent.com/u/50332766/kml/races/' + raceKmlName + '.kml';
   var raceKmlOptions = {
     suppressInfoWindows: true,
     preserveViewport: false,
     map: raceMap
   };
   var raceKmlLayer = new google.maps.KmlLayer(raceKmlUrl, raceKmlOptions);
+}
+
+function happy() {
+  console.log("I'm happy!");
 }

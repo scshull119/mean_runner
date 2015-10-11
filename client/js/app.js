@@ -1,5 +1,8 @@
 angular.module('RaceMaker', []);
 
+var couseKmlName;
+var raceKmlName;
+
 angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', function($scope, $http) {
 
   var currentDate = Date.now();
@@ -22,8 +25,8 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
   var goalMilesPerWeek;
   var goalRaceDistance;
 
-  var myCourse;
-  var myRace;
+  $scope.myCourse;
+  $scope.myRace;
 
   $scope.getRaces = function() {
     $http.get('/api/races').then(function(response) {
@@ -76,8 +79,10 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
       weeklyIncrease = .5;
     }
     console.log("Stored Distance: " + $scope.distance);
-    myCourse = searchCourses();
-    console.log(myCourse.name);
+
+    $scope.myCourse = searchCourses();
+    console.log($scope.myCourse.name);
+    courseKmlName = $scope.myCourse.kmlName;
 
     slideOut($distance, 'left');
     displaySlide(newOrder, 2, 'right');
@@ -97,8 +102,11 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
     console.log("Stored Days/week: " + $scope.days);
     console.log("Goal Race Distance: " + goalRaceDistance + " miles");
 
-    myRace = searchRaces();
-    console.log(myRace.name);
+    $scope.myRace = searchRaces();
+    console.log($scope.myRace.name);
+    raceKmlName = $scope.myRace.kmlName;
+
+    initMap();
 
     slideOut($days, 'left');
     displaySlide(newOrder, 3, 'right');

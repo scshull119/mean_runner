@@ -111,8 +111,6 @@ function slideOut($slide, direction) {
 
 $(document).ready(function() {
 
-  var myApp = myApp || {};
-
   console.log("JS ready");
 
   // Listeners for welcome slide links..
