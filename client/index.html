@@ -110,9 +110,21 @@
 
           <div id="race-slide" class="slide">
             <div class="slide-container">
-              <h4>{{ myRace.name }}</h4>
-              <div id="race-map" class="map">
-
+              <div class="row">
+                <div class="six columns">
+                  <h4>{{ myRace.name }}</h4>
+                  <div id="race-map" class="map"></div>
+                </div>
+                <div class="six columns">
+                  <ul class="course-info">
+                    <li>Date: {{ myRace.date }}</li>
+                    <li>Race Distance: {{ myRace.raceType }}</li>
+                    <li>Borough: {{ myRace.borough }}</li>
+                    <li>Venue: {{ myRace.venue }}</li>
+                    <li>{{ myRace.description }}<li>
+                    <li>Race Sponsor: <a href="http://www.nyrr.org">{{ myRace.producer }}</a>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>

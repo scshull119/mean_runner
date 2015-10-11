@@ -116,9 +116,12 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
   $scope.storePace = function() {
     $left.off();
     $right.off();
-    $scope.paceMins = $('#pace-mins').val();
-    $scope.paceSecs = $('#pace-secs').val();
+    $scope.paceMins = parseInt($('#pace-mins').val());
+    $scope.paceSecs = parseInt($('#pace-secs').val());
     console.log("Stored Pace: " + $scope.paceMins + ":" + $scope.paceSecs);
+    projectRaceTime();
+    console.log($scope.projectedTimeString);
+
     slideOut($pace, 'left');
     displaySlide(newOrder, 4, 'right');
     $right.hide();
@@ -169,6 +172,40 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
       return closestRace;
     } else {
       return false;
+    }
+  }
+
+  function projectRaceTime() {
+    var milePaceMins = $scope.paceMins;
+    var milePaceSecs = $scope.paceSecs;
+    var raceMileage = $scope.myRace.mileage;
+    var mileDecimalMins = milePaceMins + (milePaceSecs / 60);
+
+    var raceTime = mileDecimalMins * Math.pow(raceMileage, 1.06);
+
+    if(raceTime >= 60) {
+      var projectedHours = Math.floor(raceTime / 60);
+      projectedHours.toString();
+      raceTime -= projectedHours * 60;
+    }
+
+    var projectedMins = Math.floor(raceTime);
+    var projectedSecs = Math.floor((raceTime - projectedMins) * 60);
+
+    if(projectedHours) {
+      $scope.projectedTimeString = projectedHours + ":" + precedingZero(projectedMins) + ":" + precedingZero(projectedSecs);
+    } else {
+      $scope.projectedTimeString = precedingZero(projectedMins) + ":" + precedingZero(projectedSecs);
+    }
+  }
+
+  function precedingZero(myInt) {
+    if(myInt < 10) {
+      myInt = myInt.toString();
+      return '0' + myInt;
+    } else {
+      myInt = myInt.toString();
+      return myInt;
     }
   }
 

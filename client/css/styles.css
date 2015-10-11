@@ -122,6 +122,10 @@ input[type="number"] {
   width: 250px;
 }
 
+.course-info li {
+  display: block;
+}
+
 /* For people who like really narrow browser windows */
 
 @media (max-width: 600px) {
