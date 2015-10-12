@@ -56,6 +56,7 @@ var CoursesController = require('./server/controllers/courses');
 app.use('/api/courses', CoursesController);
 
 // Listening
-app.listen('8080', function() {
-  console.log("Listening on 8080...")
+var port = process.env.PORT || 8080;
+app.listen(port, function() {
+  console.log("Listening on " + port + "...");
 });
