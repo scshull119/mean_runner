@@ -15,7 +15,7 @@ var express    =  require('express'),
 //var mongooseUri = uriUtil.formatMongoose(mongodbUri);
 
 // Database connection
-mongoose.connect('mongodb://localhost/mean_runner');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/mean_runner');
 
 
 
