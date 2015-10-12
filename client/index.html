@@ -71,18 +71,22 @@
               <h4>Almost There!</h4>
               <h5>Create an account to save your info, or skip to race recommendations.</h5>
               <div class="row">
-                <form action="/users" method="post">
+                <form ng-submit="createUser()">
                   <div class="four columns">
                     <label for="choose-username">Username:</label>
-                    <input id="choose-username" type="text" name="user[username]" placeholder="Username...">
+                    <input id="choose-username" type="text" ng-model="newUser.username" placeholder="Username...">
                     <label for="first-name">First Name:</label>
-                    <input id="first-name" type="text" name="user[first_name]" placeholder="First name...">
+                    <input id="first-name" type="text" ng-model="newUser.first_name" placeholder="First name...">
                   </div>
                   <div class="four columns">
                     <label for="choose-password">Password:</label>
-                    <input id="choose-password" type="password" name="user[password]">
+                    <input id="choose-password" type="password" ng-model="newUser.password">
                     <label for="confirm-password">Confirm Password:</label>
-                    <input id="confirm-password" type="password" name="user[password_confirm]">
+                    <input id="confirm-password" type="password">
+                    <!-- <input type="hidden" ng-model="newUser.startMileage" value="{{ distance }}">
+                    <input type="hidden" ng-model="newUser.startDays" value="{{ days }}">
+                    <input type="hidden" ng-model="newUser.startPaceMins" value="{{ paceMins }}">
+                    <input type="hidden" ng-model="newUser.startPaceSecs" value="{{ paceSecs }}"> -->
                   </div>
                   <div class="four columns">
                     <input type="submit">
@@ -96,14 +100,35 @@
           <div id="login-slide" class="slide">
             <div class="slide-container">
               <h4>Login Slide</h4>
+              <form ng-submit="loginUser()">
+                <input type="text" ng-model="currentUser.username" placeholder="Username">
+                <input type="password" ng-model="currentUser.password" placeholder="Password">
+                <input type="submit">
+              </form>
+            </div>
+          </div>
+
+          <div id="profile-slide" class="slide">
+            <div class="slide-container">
+
             </div>
           </div>
 
           <div id="course-slide" class="slide">
             <div class="slide-container">
-              <h4>{{ myCourse.name }}</h4>
-              <div id="course-map" class="map">
-
+              <div class="row">
+                <div class="six columns">
+                  <h4>{{ myCourse.name }}</h4>
+                  <div id="course-map" class="map"></div>
+                </div>
+                <div class="six columns">
+                  <ul class="course-info">
+                    <li>Mileage: {{ myCourse.mileage }}</li>
+                    <li>Borough: {{ myCourse.borough }}</li>
+                    <li>Venue: {{ myCourse.venue }}</li>
+                    <li>{{ myCourse.description }}<li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -117,8 +142,9 @@
                 </div>
                 <div class="six columns">
                   <ul class="course-info">
-                    <li>Date: {{ myRace.date }}</li>
+                    <li>Date: {{ myRace.date | date:'MMM d, yyyy' }}</li>
                     <li>Race Distance: {{ myRace.raceType }}</li>
+                    <li>Goal Finishing Time: {{ projectedTimeString }}</li>
                     <li>Borough: {{ myRace.borough }}</li>
                     <li>Venue: {{ myRace.venue }}</li>
                     <li>{{ myRace.description }}<li>

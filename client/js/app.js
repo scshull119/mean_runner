@@ -12,6 +12,9 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
   $scope.races = [];
   $scope.newRace = {};
 
+  $scope.users = [];
+  $scope.newUser = {};
+
   $scope.courses = [];
   $scope.newCourse = {};
 
@@ -19,6 +22,8 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
   $scope.days = 3;
   $scope.paceMins = 10;
   $scope.paceSecs  = 0;
+
+  $scope.currentUser = {};
 
   var weeklyIncrease = .35;
   var weeklyMiles;
@@ -57,15 +62,17 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
   };
 
   $scope.getUsers = function() {
-    $http.get('/api/races').then(function(response) {
-      $scope.races = response.data;
+    $http.get('/api/users').then(function(response) {
+      $scope.users = response.data;
     });
   };
 
   $scope.createUser = function() {
-    $http.post('/api/races', $scope.newRace).then(function(response) {
-      $scope.races.push(response.data);
-      $scope.newRace = {};
+    $http.post('/api/users', $scope.newUser).then(function(response) {
+      $scope.users.push(response.data);
+      $scope.newUser = {};
+      slideOut($signup, 'left');
+      displaySlide(outputOrder, 1, 'right');
     })
   };
 
@@ -74,6 +81,7 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
     $right.off();
 
     $scope.distance = parseFloat($('#distance-input').val());
+    $scope.newUser.startMileage = $scope.distance;
 
     if($scope.distance >= 4) {
       weeklyIncrease = .5;
@@ -81,6 +89,7 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
     console.log("Stored Distance: " + $scope.distance);
 
     $scope.myCourse = searchCourses();
+    $scope.newUser.myCourse = $scope.myCourse;
     console.log($scope.myCourse.name);
     courseKmlName = $scope.myCourse.kmlName;
 
@@ -94,6 +103,7 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
     $right.off();
 
     $scope.days = parseInt($('#days-input').val());
+    $scope.newUser.startDays = $scope.days;
     weeklyMiles = $scope.distance * $scope.days;
     totalWeeklyIncrease = weeklyIncrease * $scope.days;
     goalMilesPerWeek = weeklyMiles + (totalWeeklyIncrease * 6);
@@ -103,6 +113,7 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
     console.log("Goal Race Distance: " + goalRaceDistance + " miles");
 
     $scope.myRace = searchRaces();
+    $scope.newUser.myRace = $scope.myRace;
     console.log($scope.myRace.name);
     raceKmlName = $scope.myRace.kmlName;
 
@@ -117,7 +128,9 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
     $left.off();
     $right.off();
     $scope.paceMins = parseInt($('#pace-mins').val());
+    $scope.newUser.startPaceMins = $scope.paceMins;
     $scope.paceSecs = parseInt($('#pace-secs').val());
+    $scope.newUser.startPaceSecs = $scope.paceSecs;
     console.log("Stored Pace: " + $scope.paceMins + ":" + $scope.paceSecs);
     projectRaceTime();
     console.log($scope.projectedTimeString);
@@ -130,6 +143,10 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
   $scope.noSave = function() {
     $left.off();
     $right.off();
+    $('#distance-input').val('');
+    $('#days-input').val('');
+    $('#pace-mins').val('');
+    $('#pace-secs').val('');
     slideOut($signup, 'left');
     displaySlide(outputOrder, 1, 'right');
   };

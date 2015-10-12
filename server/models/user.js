@@ -8,10 +8,15 @@ var UserSchema = new mongoose.Schema({
   startMileage: {type: Number},
   startDays: {type: Number},
   startPaceMins: {type: Number},
-  startPaceSecs: {type: Number}
+  startPaceSecs: {type: Number},
+  myCourse: {type: String},
+  myRace: {type: String}
 });
 
 UserSchema.pre('save', function(next) {
+
+  var user  = this;
+
   if(user.isModified('password')) {
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(user.password, salt);

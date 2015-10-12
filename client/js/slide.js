@@ -9,6 +9,7 @@ var $days = $('#days-slide');
 var $pace = $('#pace-slide');
 var $signup = $('#signup-slide');
 var $login = $('#login-slide');
+var $profile = $('#profile-slide');
 var $course = $('#course-slide');
 var $race = $('#race-slide');
 
@@ -26,7 +27,7 @@ function displayWelcome(origin) {
 // Function and arrays for managing slide order and forward/back controls.
 
 var newOrder = [$welcome, $distance, $days, $pace, $signup];
-var loginOrder = [$welcome, $login];
+var loginOrder = [$welcome, $login, $profile];
 var outputOrder = [$welcome, $course, $race];
 
 function displaySlide(orderArray, index, origin) {
