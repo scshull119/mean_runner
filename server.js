@@ -5,15 +5,6 @@ var express    =  require('express'),
   //  uriUtil = require('mongodb-uri');
     morgan    =  require('morgan');
 
-
-// MongoLab
-
-//var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
-              //  replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } };
-
-//var mongodbUri = 'mongodb://user:pass@host:port/db';
-//var mongooseUri = uriUtil.formatMongoose(mongodbUri);
-
 // Database connection
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/mean_runner');
 
