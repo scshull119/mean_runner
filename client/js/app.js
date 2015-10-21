@@ -23,6 +23,7 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
   $scope.paceMins = 10;
   $scope.paceSecs  = 0;
 
+  $scope.attemptingUser = {};
   $scope.currentUser = {};
 
   var weeklyIncrease = .35;
@@ -58,12 +59,22 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
     $http.post('/api/courses', $scope.newCourse).then(function(response) {
       $scope.courses.push(response.data);
       $scope.newCourse = {};
-    })
+    });
   };
 
   $scope.getUsers = function() {
     $http.get('/api/users').then(function(response) {
       $scope.users = response.data;
+    });
+  };
+
+  $scope.loginUser = function() {
+    $http.post('/login', $scope.attemptingUser).then(function(response) {
+      if(response.status === 401) {
+        alert("Error!");
+      } else {
+        $scope.currentUser = response.data
+      }
     });
   };
 

@@ -1,8 +1,11 @@
 // Dependency Requirements
 var express    =  require('express'),
     bodyParser =  require('body-parser'),
-    mongoose   =  require('mongoose');
-  //  uriUtil = require('mongodb-uri');
+    session    =  require('express-session'),
+    mongoose   =  require('mongoose'),
+    passport   =  require('passport'),
+    LocalStrategy = require('passport-local').Strategy,
+  //  uriUtil = require('mongodb-uri'),
     morgan    =  require('morgan');
 
 // Database connection
@@ -19,6 +22,50 @@ var app = express();
 
 app.use(morgan('dev'));
 
+// User authentication
+app.use(session({
+  secret: 'keyboard cat',
+  resave: 'false',
+  saveUninitialized: 'false'
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(user, done) {
+  User.findOne({
+    _id: id
+  }, '-password -salt', function(err, user) {
+    done(err, user);
+  });
+});
+
+passport.use(new LocalStrategy(function(username, password, done) {
+  User.findOne({
+    username: username
+  }, function(err, user) {
+    if(err) {
+      return done(err);
+    }
+
+    if(!user) {
+      return done(null, false, {
+        message: 'Unknown user'
+      });
+    }
+    if(!user.authenticate(password)) {
+      return done(null, false, {
+        message: 'Invalid password'
+      });
+    }
+
+    return done(null, user);
+  });
+}));
+
 // Body parsing
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -34,6 +81,19 @@ app.get('/', function(req, res) {
 
 app.get('/admin', function(req, res) {
   res.sendFile(__dirname + '/client/admin.html');
+});
+
+app.get('loggedin', function(req, res) {
+  res.send(req.isAuthenticated() ? req.user : '0');
+});
+
+app.post('/login', passport.authenticate('local'), function(req, res) {
+  res.send(req.user);
+});
+
+app.post('/logout', function(req, res) {
+  req.logOut();
+  res.send(200);
 });
 
 // Controllers

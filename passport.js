@@ -1,7 +1,10 @@
 var passport = require('passport'),
     mongoose = require('mongoose');
 
+
+
 module.exports = function() {
+  console.log("Hey passport");
   var User = mongoose.model('User');
 
   passport.serializeUser(function(user, done) {
@@ -16,5 +19,5 @@ module.exports = function() {
     });
   });
 
-  require('./strategies/local.js')();
+  require('./server/strategies/local.js')();
 };
