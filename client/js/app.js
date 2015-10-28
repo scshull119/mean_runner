@@ -24,7 +24,7 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
   $scope.paceSecs  = 0;
 
   $scope.attemptingUser = {};
-  $scope.currentUser = {};
+  $scope.currentUser;
 
   var weeklyIncrease = .35;
   var weeklyMiles;
@@ -74,7 +74,14 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
         alert("Error!");
       } else {
         $scope.currentUser = response.data
+        console.log($scope.currentUser);
       }
+    });
+  };
+
+  $scope.logoutUser = function() {
+    $http.post('/logout').then(function(response) {
+      $scope.currentUser = null;
     });
   };
 

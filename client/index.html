@@ -99,12 +99,20 @@
 
           <div id="login-slide" class="slide">
             <div class="slide-container">
-              <h4>Login Slide</h4>
-              <form ng-submit="loginUser()">
-                <input type="text" ng-model="attemptingUser.username" placeholder="Username">
-                <input type="password" ng-model="attemptingUser.password" placeholder="Password">
-                <input type="submit">
-              </form>
+              <div class="login-form" ng-hide="currentUser">
+                <h4>Login Slide</h4>
+                <form ng-submit="loginUser()">
+                  <input type="text" ng-model="attemptingUser.username" placeholder="Username">
+                  <input type="password" ng-model="attemptingUser.password" placeholder="Password">
+                  <input type="submit">
+                </form>
+              </div>
+              <div class="welcome-user" ng-show="currentUser">
+                <h4>Welcome, {{ currentUser.first_name }}</h4>
+                <form ng-submit="logoutUser()">
+                  <input type="submit" value="Log Out">
+                </form>
+              </div>
             </div>
           </div>
 

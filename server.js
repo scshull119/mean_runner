@@ -35,7 +35,7 @@ passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
 
-passport.deserializeUser(function(user, done) {
+passport.deserializeUser(function(id, done) {
   User.findOne({
     _id: id
   }, '-password -salt', function(err, user) {
@@ -48,21 +48,29 @@ passport.use(new LocalStrategy(function(username, password, done) {
     username: username
   }, function(err, user) {
     if(err) {
+      console.log("Error");
       return done(err);
     }
 
     if(!user) {
+      console.log("Not a valid user");
       return done(null, false, {
         message: 'Unknown user'
       });
     }
-    if(!user.authenticate(password)) {
-      return done(null, false, {
-        message: 'Invalid password'
-      });
-    }
 
-    return done(null, user);
+    user.authenticate(password, function(isMatch) {
+      if(!isMatch) {
+        console.log("Wrong password");
+        return done(null, false, {
+          message: 'Invalid password'
+        });
+      }
+
+      console.log("I think we're good, " + user);
+      return done(null, user);
+    });
+
   });
 }));
 
