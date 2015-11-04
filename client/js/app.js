@@ -77,6 +77,14 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
       $scope.welcomeMessage = "View Saved Info"
       $('#login-username').val('');
       $('#login-password').val('');
+
+      $scope.myCourse = $scope.currentUser.myCourse;
+      $scope.myRace = $scope.currentUser.myRace;
+      courseKmlName = $scope.myCourse.kmlName;
+      raceKmlName = $scope.myRace.kmlName;
+
+      initMap();
+      
     }, function(response) {
       console.log(response);
       if(response.status === 401) {

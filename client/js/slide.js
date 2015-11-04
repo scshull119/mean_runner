@@ -29,6 +29,8 @@ function displayWelcome(origin) {
 var newOrder = [$welcome, $distance, $days, $pace, $signup];
 var loginOrder = [$welcome, $login];
 var outputOrder = [$welcome, $course, $race];
+var savedCourseOrder = [$welcome, $login, $course];
+var savedRaceOrder = [$welcome, $login, $race];
 
 function displaySlide(orderArray, index, origin) {
   $slide = orderArray[index];
@@ -126,6 +128,22 @@ $(document).ready(function() {
     e.preventDefault();
     slideOut($welcome, 'left');
     displaySlide(loginOrder, 1, 'right');
+  });
+
+  $('#course-link').on('click', function(e) {
+    e.preventDefault();
+    $right.off();
+    $left.off();
+    slideOut($login, 'left');
+    displaySlide(savedCourseOrder, 2, 'right');
+  });
+
+  $('#race-link').on('click', function(e) {
+    e.preventDefault();
+    $right.off();
+    $left.off();
+    slideOut($login, 'left');
+    displaySlide(savedRaceOrder, 2, 'right');
   });
 
 

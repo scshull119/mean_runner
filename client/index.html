@@ -28,7 +28,7 @@
             <div class="slide-container">
               <h2 class="bib-text">WELCOME</h2>
               <ul id="welcome-options">
-                <li><a href="" id="launch-link">New? Get Started</a></li>
+                <li ng-hide="currentUser"><a href="" id="launch-link">New? Get Started</a></li>
                 <li><a href="" id="login-link">{{ welcomeMessage }}</a></li>
               </ul>
             </div>
@@ -110,8 +110,8 @@
               <div class="welcome-user" ng-show="currentUser">
                 <h4>Welcome, {{ currentUser.first_name }}</h4>
                 <ul>
-                  <li>Your recommended training course is: {{ currentUser.myCourse.name }}</li>
-                  <li>Your recommended goal race is: {{ currentUser.myRace.name }}</li>
+                  <li>Your recommended training course is: <a href="" id="course-link">{{ currentUser.myCourse.name }}</a></li>
+                  <li>Your recommended goal race is: <a href="" id="race-link">{{ currentUser.myRace.name }}</a></li>
                 </ul>
                 <form ng-submit="logoutUser()">
                   <input type="submit" value="Log Out">
