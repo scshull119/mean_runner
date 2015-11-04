@@ -71,7 +71,7 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
   $scope.loginUser = function() {
     $http.post('/login', $scope.attemptingUser).then(function(response) {
       if(response.status === 401) {
-        alert("Error!");
+        console.log(response);
       } else {
         $scope.currentUser = response.data
         console.log($scope.currentUser);

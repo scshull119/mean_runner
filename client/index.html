@@ -109,6 +109,10 @@
               </div>
               <div class="welcome-user" ng-show="currentUser">
                 <h4>Welcome, {{ currentUser.first_name }}</h4>
+                <ul>
+                  <li>Your recommended training course is: {{ currentUser.myCourse.name }}</li>
+                  <li>Your recommended goal race is: {{ currentUser.myRace.name }}</li>
+                </ul>
                 <form ng-submit="logoutUser()">
                   <input type="submit" value="Log Out">
                 </form>

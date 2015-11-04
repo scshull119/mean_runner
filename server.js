@@ -68,10 +68,11 @@ passport.use(new LocalStrategy(function(username, password, done) {
       }
 
       console.log("I think we're good, " + user);
+      //user.populate('myCourse');
       return done(null, user);
     });
 
-  });
+  }).populate('myCourse').populate('myRace');
 }));
 
 // Body parsing

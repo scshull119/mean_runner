@@ -9,8 +9,8 @@ var UserSchema = new mongoose.Schema({
   startDays: {type: Number},
   startPaceMins: {type: Number},
   startPaceSecs: {type: Number},
-  myCourse: {type: String},
-  myRace: {type: String}
+  myCourse: {type: mongoose.Schema.ObjectId, ref: 'course'},
+  myRace: {type: mongoose.Schema.ObjectId, ref: 'race'}
 });
 
 UserSchema.pre('save', function(next) {
