@@ -9,6 +9,8 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
 
   console.log("RaceMaker controller is working");
 
+  $scope.welcomeMessage = "Returning? Log In";
+
   $scope.races = [];
   $scope.newRace = {};
 
@@ -72,6 +74,7 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
     $http.post('/login', $scope.attemptingUser).then(function(response) {
       $scope.currentUser = response.data
       console.log($scope.currentUser);
+      $scope.welcomeMessage = "View Saved Info"
       $('#login-username').val('');
       $('#login-password').val('');
     }, function(response) {
@@ -87,6 +90,7 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
   $scope.logoutUser = function() {
     $http.post('/logout').then(function(response) {
       $scope.currentUser = null;
+      $scope.welcomeMessage = "Returning? Log In"
     });
   };
 

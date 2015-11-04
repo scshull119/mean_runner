@@ -29,7 +29,7 @@
               <h2 class="bib-text">WELCOME</h2>
               <ul id="welcome-options">
                 <li><a href="" id="launch-link">New? Get Started</a></li>
-                <li><a href="" id="login-link">Returning? Log In!</a></li>
+                <li><a href="" id="login-link">{{ welcomeMessage }}</a></li>
               </ul>
             </div>
           </div>
@@ -100,7 +100,7 @@
           <div id="login-slide" class="slide">
             <div class="slide-container">
               <div class="login-form" ng-hide="currentUser">
-                <h4>Login Slide</h4>
+                <h4>Welcome! Please Login!</h4>
                 <form ng-submit="loginUser()">
                   <input id="login-username" type="text" ng-model="attemptingUser.username" placeholder="Username">
                   <input id="login-password" type="password" ng-model="attemptingUser.password" placeholder="Password">

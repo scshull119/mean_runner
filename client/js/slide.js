@@ -27,7 +27,7 @@ function displayWelcome(origin) {
 // Function and arrays for managing slide order and forward/back controls.
 
 var newOrder = [$welcome, $distance, $days, $pace, $signup];
-var loginOrder = [$welcome, $login, $profile];
+var loginOrder = [$welcome, $login];
 var outputOrder = [$welcome, $course, $race];
 
 function displaySlide(orderArray, index, origin) {
