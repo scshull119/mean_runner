@@ -70,11 +70,16 @@ angular.module('RaceMaker').controller('RacesController', ['$scope', '$http', fu
 
   $scope.loginUser = function() {
     $http.post('/login', $scope.attemptingUser).then(function(response) {
+      $scope.currentUser = response.data
+      console.log($scope.currentUser);
+      $('#login-username').val('');
+      $('#login-password').val('');
+    }, function(response) {
+      console.log(response);
       if(response.status === 401) {
-        console.log(response);
-      } else {
-        $scope.currentUser = response.data
-        console.log($scope.currentUser);
+        alert("Invalid username or password. Please try again.");
+        $('#login-username').val('');
+        $('#login-password').val('');
       }
     });
   };
